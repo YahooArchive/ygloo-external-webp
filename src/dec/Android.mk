@@ -49,10 +49,14 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CFLAGS := -DANDROID -DWEBP_SWAP_16BIT_CSP
 
+# If static library has to be linked inside a larger shared library later,
+# all code has to be compiled as PIC (Position Independant Code)
+LOCAL_CFLAGS += -fPIC -DPIC
+
 LOCAL_C_INCLUDES += \
         $(LOCAL_PATH) \
         $(LOCAL_PATH)/../../include
 
-LOCAL_MODULE:= libwebp-decode
+LOCAL_MODULE:= libyahoo_webpdec
 
 include $(BUILD_STATIC_LIBRARY)
