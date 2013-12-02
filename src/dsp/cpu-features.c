@@ -8,7 +8,9 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
+#ifdef CPUFEATURE_ANDROID
 #include <sys/system_properties.h>
+#endif
 #ifdef __arm__
 #include <machine/cpu-features.h>
 #endif
