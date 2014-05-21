@@ -14,6 +14,12 @@
 
 LOCAL_PATH:= $(call my-dir)
 
+ifeq ($(BUILD_DEBUG),)
+ifeq ($(APP_OPTIM),debug)
+BUILD_DEBUG:=true
+endif
+endif
+
 include $(CLEAR_VARS)
 LOCAL_SRC_FILES := \
         alpha.c \
@@ -52,6 +58,21 @@ LOCAL_CFLAGS := -DANDROID -DWEBP_SWAP_16BIT_CSP
 # If static library has to be linked inside a larger shared library later,
 # all code has to be compiled as PIC (Position Independant Code)
 LOCAL_CFLAGS += -fPIC -DPIC
+
+ifeq ($(BUILD_DEBUG),true)
+# Debug build, turn off all optimization
+LOCAL_CFLAGS += -DDEBUG -UNDEBUG -O0 -g
+else
+# Performance for this specific library requires pushing further
+# optimization level, and favor performance over code size
+LOCAL_CFLAGS += -O3
+LOCAL_CFLAGS += -fstrict-aliasing
+ifneq ($(TARGET_COMPILER),clang)
+# -fprefetch-loop-arrays is a GCC specific option, not supported
+# by clang
+LOCAL_CFLAGS += -fprefetch-loop-arrays
+endif
+endif
 
 LOCAL_C_INCLUDES += \
         $(LOCAL_PATH) \
