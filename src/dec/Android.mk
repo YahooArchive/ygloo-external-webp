@@ -55,6 +55,9 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CFLAGS := -DANDROID -DWEBP_SWAP_16BIT_CSP
 
+# To enable optional support for multi-threaded decoder
+# LOCAL_CFLAGS += -DWEBP_USE_THREAD=1
+
 # If static library has to be linked inside a larger shared library later,
 # all code has to be compiled as PIC (Position Independant Code)
 LOCAL_CFLAGS += -fPIC -DPIC
