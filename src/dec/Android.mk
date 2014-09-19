@@ -55,6 +55,13 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CFLAGS := -DANDROID -DWEBP_SWAP_16BIT_CSP
 
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+LOCAL_CFLAGS += -D__ARM_ARCH_7A__
+endif
+ifeq ($(TARGET_ARCH_ABI),armeabi)
+LOCAL_CFLAGS += -D__ARM_ARCH_6__
+endif
+
 # To enable optional support for multi-threaded decoder
 # LOCAL_CFLAGS += -DWEBP_USE_THREAD=1
 
