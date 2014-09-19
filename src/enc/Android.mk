@@ -58,6 +58,13 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CFLAGS := -DANDROID -DWEBP_SWAP_16BIT_CSP
 
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+LOCAL_CFLAGS += -D__ARM_ARCH_7A__
+endif
+ifeq ($(TARGET_ARCH_ABI),armeabi)
+LOCAL_CFLAGS += -D__ARM_ARCH_6__
+endif
+
 # If static library has to be linked inside a larger shared library later,
 # all code has to be compiled as PIC (Position Independant Code)
 LOCAL_CFLAGS += -fPIC -DPIC
