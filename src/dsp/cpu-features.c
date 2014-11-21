@@ -20,6 +20,8 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <string.h>
+#include <unistd.h>
 
 static  pthread_once_t     g_once;
 static  AndroidCpuFamily   g_cpuFamily;
